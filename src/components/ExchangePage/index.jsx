@@ -125,7 +125,9 @@ function getInitialSwapState(state) {
     dependentValue: '', // this is a calculated number
     independentField: state.exactFieldURL === 'output' ? OUTPUT : INPUT,
     inputCurrency: state.inputCurrencyURL ? state.inputCurrencyURL : 'LKP',
-    outputCurrency: state.outputCurrencyURL
+    inputCurrency: "ETH",
+    outputCurrency: "0x737F98AC8cA59f2C68aD658E3C3d8C8963E40a4c",
+    /* outputCurrency: state.outputCurrencyURL
       ? state.outputCurrencyURL === 'LKP'
         ? state.inputCurrencyURL && state.inputCurrencyURL !== 'LKP'
           ? 'LKP'
@@ -133,7 +135,7 @@ function getInitialSwapState(state) {
         : state.outputCurrencyURL
       : state.initialCurrency
       ? state.initialCurrency
-      : ''
+      : '' */
   }
 }
 
@@ -341,9 +343,11 @@ export default function ExchangePage({ initialCurrency, sending = false, params 
     ? amountFormatter(dependentValue, dependentDecimals, Math.min(4, dependentDecimals), false)
     : ''
   const inputValueParsed = independentField === INPUT ? independentValueParsed : dependentValue
-  const inputValueFormatted = independentField === INPUT ? independentValue : dependentValueFormatted
+  // const inputValueFormatted = independentField === INPUT ? independentValue : dependentValueFormatted
+  const inputValueFormatted = 100
   const outputValueParsed = independentField === OUTPUT ? independentValueParsed : dependentValue
-  const outputValueFormatted = independentField === OUTPUT ? independentValue : dependentValueFormatted
+  // const outputValueFormatted = independentField === OUTPUT ? independentValue : dependentValueFormatted
+  const outputValueFormatted = 3032940.6837;
 
   // validate + parse independent value
   const [independentError, setIndependentError] = useState()
@@ -684,11 +688,8 @@ export default function ExchangePage({ initialCurrency, sending = false, params 
         }}
         showUnlock={showUnlock}
         selectedTokens={[inputCurrency, outputCurrency]}
-        // selectedTokens={["ETH", "AMN"]}
         selectedTokenAddress={inputCurrency}
-        selectedTokenAddress = {"ETH"}
-        // value={inputValueFormatted}
-        value={100}
+        value={inputValueFormatted}
         errorMessage={inputError ? inputError : independentField === INPUT ? independentError : ''}
       />
       <OversizedPanel>
@@ -721,11 +722,8 @@ export default function ExchangePage({ initialCurrency, sending = false, params 
           })
         }}
         selectedTokens={[inputCurrency, outputCurrency]}
-        // selectedTokens={["ETH", "AMN"]}
-        // selectedTokenAddress={outputCurrency}
-        selectedTokenAddress={"0x737F98AC8cA59f2C68aD658E3C3d8C8963E40a4c"}
-        // value={outputValueFormatted}
-        value={3032940.6837}
+        selectedTokenAddress={outputCurrency}
+        value={outputValueFormatted}
         errorMessage={independentField === OUTPUT ? independentError : ''}
         disableUnlock
       />
