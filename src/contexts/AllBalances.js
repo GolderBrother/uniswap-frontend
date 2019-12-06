@@ -68,8 +68,8 @@ export function useFetchAllBalances() {
         Object.keys(allTokens).map(async k => {
           let balance = null
           let ethRate = null
-          if (isAddress(k) || k === 'LKP') {
-            if (k === 'LKP') {
+          if (isAddress(k) || k === 'ETH') {
+            if (k === 'ETH') {
               balance = await getEtherBalance(account, library).catch(() => null)
               ethRate = ONE
             } else {

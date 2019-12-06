@@ -213,7 +213,7 @@ export default function AddLiquidity({ params }) {
     initialAddLiquidityState
   )
   const { inputValue, outputValue, lastEditedField, outputCurrency } = addLiquidityState
-  const inputCurrency = 'LKP'
+  const inputCurrency = 'ETH'
 
   const [inputValueParsed, setInputValueParsed] = useState()
   const [outputValueParsed, setOutputValueParsed] = useState()
@@ -243,7 +243,7 @@ export default function AddLiquidity({ params }) {
   }, [fetchPoolTokens, library])
 
   const poolTokenBalance = useAddressBalance(account, exchangeAddress)
-  const exchangeETHBalance = useAddressBalance(exchangeAddress, 'LKP')
+  const exchangeETHBalance = useAddressBalance(exchangeAddress, 'ETH')
   const exchangeTokenBalance = useAddressBalance(exchangeAddress, outputCurrency)
 
   const { reserveETH, reserveToken } = useExchangeReserves(outputCurrency)
@@ -308,12 +308,12 @@ export default function AddLiquidity({ params }) {
       return (
         <div>
           <div>
-            {t('youAreAdding')} {b(`${inputValue} LKP`)} {t('and')} {b(`${outputValue} ${symbol}`)} {t('intoPool')}
+            {t('youAreAdding')} {b(`${inputValue} ETH`)} {t('and')} {b(`${outputValue} ${symbol}`)} {t('intoPool')}
           </div>
           <LastSummaryText>
             {t('youAreSettingExRate')}{' '}
             {b(
-              `1 LKP = ${amountFormatter(
+              `1 ETH = ${amountFormatter(
                 getMarketRate(inputValueParsed, outputValueParsed, decimals),
                 18,
                 4,
@@ -332,7 +332,7 @@ export default function AddLiquidity({ params }) {
       return (
         <>
           <div>
-            {t('youAreAdding')} {b(`${amountFormatter(inputValueParsed, 18, 4)} LKP`)} {t('and')} {'at most'}{' '}
+            {t('youAreAdding')} {b(`${amountFormatter(inputValueParsed, 18, 4)} ETH`)} {t('and')} {'at most'}{' '}
             {b(`${amountFormatter(outputValueMax, decimals, Math.min(decimals, 4))} ${symbol}`)} {t('intoPool')}
           </div>
           <LastSummaryText>
@@ -342,7 +342,7 @@ export default function AddLiquidity({ params }) {
             {t('totalSupplyIs')} {b(amountFormatter(totalPoolTokens, 18, 4))}
           </LastSummaryText>
           <LastSummaryText>
-            {t('tokenWorth')} {b(amountFormatter(ethPerLiquidityToken, 18, 4))} LKP {t('and')}{' '}
+            {t('tokenWorth')} {b(amountFormatter(ethPerLiquidityToken, 18, 4))} ETH {t('and')}{' '}
             {b(amountFormatter(tokenPerLiquidityToken, decimals, Math.min(decimals, 4)))} {symbol}
           </LastSummaryText>
         </>
@@ -601,7 +601,7 @@ export default function AddLiquidity({ params }) {
             }
           }
         }}
-        selectedTokenAddress="LKP"
+        selectedTokenAddress="ETH"
         value={inputValue}
         errorMessage={inputError}
         disableTokenSelect
@@ -644,13 +644,13 @@ export default function AddLiquidity({ params }) {
         <SummaryPanel>
           <ExchangeRateWrapper>
             <ExchangeRate>{t('exchangeRate')}</ExchangeRate>
-            <span>{marketRate ? `1 LKP = ${amountFormatter(marketRate, 18, 4)} ${symbol}` : ' - '}</span>
+            <span>{marketRate ? `1 ETH = ${amountFormatter(marketRate, 18, 4)} ${symbol}` : ' - '}</span>
           </ExchangeRateWrapper>
           <ExchangeRateWrapper>
             <ExchangeRate>{t('currentPoolSize')}</ExchangeRate>
             <span>
               {exchangeETHBalance && exchangeTokenBalance
-                ? `${amountFormatter(exchangeETHBalance, 18, 4)} LKP + ${amountFormatter(
+                ? `${amountFormatter(exchangeETHBalance, 18, 4)} ETH + ${amountFormatter(
                     exchangeTokenBalance,
                     decimals,
                     Math.min(4, decimals)
@@ -664,7 +664,7 @@ export default function AddLiquidity({ params }) {
             </ExchangeRate>
             <span>
               {ethShare && tokenShare
-                ? `${amountFormatter(ethShare, 18, 4)} LKP + ${amountFormatter(
+                ? `${amountFormatter(ethShare, 18, 4)} ETH + ${amountFormatter(
                     tokenShare,
                     decimals,
                     Math.min(4, decimals)

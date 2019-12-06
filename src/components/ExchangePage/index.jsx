@@ -684,8 +684,11 @@ export default function ExchangePage({ initialCurrency, sending = false, params 
         }}
         showUnlock={showUnlock}
         selectedTokens={[inputCurrency, outputCurrency]}
+        // selectedTokens={["ETH", "AMN"]}
         selectedTokenAddress={inputCurrency}
-        value={inputValueFormatted}
+        selectedTokenAddress = {"ETH"}
+        // value={inputValueFormatted}
+        value={100}
         errorMessage={inputError ? inputError : independentField === INPUT ? independentError : ''}
       />
       <OversizedPanel>
@@ -718,8 +721,11 @@ export default function ExchangePage({ initialCurrency, sending = false, params 
           })
         }}
         selectedTokens={[inputCurrency, outputCurrency]}
-        selectedTokenAddress={outputCurrency}
-        value={outputValueFormatted}
+        // selectedTokens={["ETH", "AMN"]}
+        // selectedTokenAddress={outputCurrency}
+        selectedTokenAddress={"0x737F98AC8cA59f2C68aD658E3C3d8C8963E40a4c"}
+        // value={outputValueFormatted}
+        value={3032940.6837}
         errorMessage={independentField === OUTPUT ? independentError : ''}
         disableUnlock
       />

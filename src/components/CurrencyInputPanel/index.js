@@ -302,9 +302,10 @@ export default function CurrencyInputPanel({
   const { account } = useWeb3React()
 
   const userTokenBalance = useAddressBalance(account, selectedTokenAddress)
-
+  console.log('allTokens', allTokens)
+  console.log('selectedTokenAddress', selectedTokenAddress)
   function renderUnlockButton() {
-    if (disableUnlock || !showUnlock || selectedTokenAddress === 'LKP' || !selectedTokenAddress) {
+    if (disableUnlock || !showUnlock || selectedTokenAddress === 'ETH' || !selectedTokenAddress) {
       return null
     } else {
       if (!pendingApproval) {
@@ -349,7 +350,7 @@ export default function CurrencyInputPanel({
     if (typeof renderInput === 'function') {
       return renderInput()
     }
-
+    console.log('value', value)
     return (
       <InputRow>
         <Input
@@ -482,8 +483,8 @@ function CurrencySelectModal({ isOpen, onDismiss, onTokenSelect, allBalances }) 
         const aSymbol = allTokens[a].symbol.toLowerCase()
         const bSymbol = allTokens[b].symbol.toLowerCase()
 
-        if (aSymbol === 'LKP'.toLowerCase() || bSymbol === 'LKP'.toLowerCase()) {
-          return aSymbol === bSymbol ? 0 : aSymbol === 'LKP'.toLowerCase() ? -1 : 1
+        if (aSymbol === 'ETH'.toLowerCase() || bSymbol === 'ETH'.toLowerCase()) {
+          return aSymbol === bSymbol ? 0 : aSymbol === 'ETH'.toLowerCase() ? -1 : 1
         }
 
         if (usdAmounts[a] && !usdAmounts[b]) {
@@ -506,7 +507,7 @@ function CurrencySelectModal({ isOpen, onDismiss, onTokenSelect, allBalances }) 
         let balance
         let usdBalance
         // only update if we have data
-        if (k === 'LKP' && allBalances && allBalances[k]) {
+        if (k === 'ETH' && allBalances && allBalances[k]) {
           balance = formatEthBalance(allBalances[k].balance)
           usdBalance = usdAmounts[k]
         } else if (allBalances && allBalances[k]) {
@@ -563,12 +564,12 @@ function CurrencySelectModal({ isOpen, onDismiss, onTokenSelect, allBalances }) 
     console.log('filteredTokenList', filteredTokenList)
     const newFilteredTokenList = [
       {name: 'ZYH', symbol: 'ZYH', address: 'Xiamen', balance: undefined, usdBalance: undefined },
-      {name: "LKP", symbol: "LKP", address: "Xiamen", balance: undefined, usdBalance: undefined},
+      {name: "ETH", symbol: "ETH", address: "Xiamen", balance: undefined, usdBalance: undefined},
       {name: "Baidu", symbol: "james", address: "Beijing", balance: undefined, usdBalance: undefined},
       {name: "ZKTeco", symbol: "ZKTeco", address: "Xiamen", balance: undefined, usdBalance: undefined},
       {name: "Google", symbol: "BAT", address: "American", balance: undefined, usdBalance: undefined}
     ]
-    return newFilteredTokenList.map(({ address, symbol, name, balance, usdBalance }) => {
+    return filteredTokenList.map(({ address, symbol, name, balance, usdBalance }) => {
       return (
         <TokenModalRow key={address} onClick={() => _onTokenSelect(address)}>
           <TokenRowLeft>

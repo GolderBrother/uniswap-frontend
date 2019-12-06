@@ -18,10 +18,10 @@ const EXCHANGE_ADDRESS = 'exchangeAddress'
 
 const UPDATE = 'UPDATE'
 
-const LKP = {
-  LKP: {
+const ETH = {
+  ETH: {
     [NAME]: 'Ethereum',
-    [SYMBOL]: 'LKP',
+    [SYMBOL]: 'ETH',
     [DECIMALS]: 18,
     [EXCHANGE_ADDRESS]: null
   }
@@ -579,7 +579,7 @@ export function useTokenDetails(tokenAddress) {
   const { library, chainId } = useWeb3React()
 
   const [state, { update }] = useTokensContext()
-  const allTokensInNetwork = { ...LKP, ...(safeAccess(state, [chainId]) || {}) }
+  const allTokensInNetwork = { ...ETH, ...(safeAccess(state, [chainId]) || {}) }
   const { [NAME]: name, [SYMBOL]: symbol, [DECIMALS]: decimals, [EXCHANGE_ADDRESS]: exchangeAddress } =
     safeAccess(allTokensInNetwork, [tokenAddress]) || {}
 
@@ -619,13 +619,13 @@ export function useAllTokenDetails(requireExchange = true) {
   const { chainId } = useWeb3React()
 
   const [state] = useTokensContext()
-  const tokenDetails = { ...LKP, ...(safeAccess(state, [chainId]) || {}) }
+  const tokenDetails = { ...ETH, ...(safeAccess(state, [chainId]) || {}) }
 
   return requireExchange
     ? Object.keys(tokenDetails)
         .filter(
           tokenAddress =>
-            tokenAddress === 'LKP' ||
+            tokenAddress === 'ETH' ||
             (safeAccess(tokenDetails, [tokenAddress, EXCHANGE_ADDRESS]) &&
               safeAccess(tokenDetails, [tokenAddress, EXCHANGE_ADDRESS]) !== ethers.constants.AddressZero)
         )

@@ -177,7 +177,7 @@ export default function RemoveLiquidity({ params }) {
 
   const [totalPoolTokens, setTotalPoolTokens] = useState()
   const poolTokenBalance = useAddressBalance(account, exchangeAddress)
-  const exchangeETHBalance = useAddressBalance(exchangeAddress, 'LKP')
+  const exchangeETHBalance = useAddressBalance(exchangeAddress, 'ETH')
   const exchangeTokenBalance = useAddressBalance(exchangeAddress, outputCurrency)
 
   // input validation
@@ -280,7 +280,7 @@ export default function RemoveLiquidity({ params }) {
     return (
       <div>
         <div>
-          {t('youAreRemoving')} {b(`${amountFormatter(ethWithdrawn, 18, 4)} LKP`)} {t('and')}{' '}
+          {t('youAreRemoving')} {b(`${amountFormatter(ethWithdrawn, 18, 4)} ETH`)} {t('and')}{' '}
           {b(`${amountFormatter(tokenWithdrawn, decimals, Math.min(decimals, 4))} ${symbol}`)} {t('outPool')}
         </div>
         <LastSummaryText>
@@ -290,7 +290,7 @@ export default function RemoveLiquidity({ params }) {
           {t('totalSupplyIs')} {b(amountFormatter(totalPoolTokens, 18, 4))}
         </LastSummaryText>
         <LastSummaryText>
-          {t('tokenWorth')} {b(amountFormatter(ETHPer, 18, 4))} LKP {t('and')}{' '}
+          {t('tokenWorth')} {b(amountFormatter(ETHPer, 18, 4))} ETH {t('and')}{' '}
           {b(amountFormatter(tokenPer, decimals, Math.min(4, decimals)))} {symbol}
         </LastSummaryText>
       </div>
@@ -304,7 +304,7 @@ export default function RemoveLiquidity({ params }) {
     if (inputError) {
       contextualInfo = inputError
       isError = true
-    } else if (!outputCurrency || outputCurrency === 'LKP') {
+    } else if (!outputCurrency || outputCurrency === 'ETH') {
       contextualInfo = t('selectTokenCont')
     } else if (!valueParsed) {
       contextualInfo = t('enterValueCont')
@@ -370,7 +370,7 @@ export default function RemoveLiquidity({ params }) {
           !!(ethWithdrawn && tokenWithdrawn) ? (
             <RemoveLiquidityOutput>
               <RemoveLiquidityOutputText>
-                {`${amountFormatter(ethWithdrawn, 18, 4, false)} LKP`}
+                {`${amountFormatter(ethWithdrawn, 18, 4, false)} ETH`}
               </RemoveLiquidityOutputText>
               <RemoveLiquidityOutputPlus> + </RemoveLiquidityOutputPlus>
               <RemoveLiquidityOutputText>
@@ -388,12 +388,12 @@ export default function RemoveLiquidity({ params }) {
         <SummaryPanel>
           <ExchangeRateWrapper>
             <ExchangeRate>{t('exchangeRate')}</ExchangeRate>
-            {marketRate ? <span>{`1 LKP = ${amountFormatter(marketRate, 18, 4)} ${symbol}`}</span> : ' - '}
+            {marketRate ? <span>{`1 ETH = ${amountFormatter(marketRate, 18, 4)} ${symbol}`}</span> : ' - '}
           </ExchangeRateWrapper>
           <ExchangeRateWrapper>
             <ExchangeRate>{t('currentPoolSize')}</ExchangeRate>
             {exchangeETHBalance && exchangeTokenBalance && (decimals || decimals === 0) ? (
-              <span>{`${amountFormatter(exchangeETHBalance, 18, 4)} LKP + ${amountFormatter(
+              <span>{`${amountFormatter(exchangeETHBalance, 18, 4)} ETH + ${amountFormatter(
                 exchangeTokenBalance,
                 decimals,
                 Math.min(decimals, 4)
@@ -408,7 +408,7 @@ export default function RemoveLiquidity({ params }) {
             </ExchangeRate>
             {ETHOwnShare && TokenOwnShare ? (
               <span>
-                {`${amountFormatter(ETHOwnShare, 18, 4)} LKP + ${amountFormatter(
+                {`${amountFormatter(ETHOwnShare, 18, 4)} ETH + ${amountFormatter(
                   TokenOwnShare,
                   decimals,
                   Math.min(decimals, 4)
